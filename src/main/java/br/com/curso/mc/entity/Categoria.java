@@ -1,11 +1,17 @@
 package br.com.curso.mc.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "T_CATEGORIA")
 public class Categoria implements Serializable{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria")
     private Integer id;
+    @Column(name = "nm_categoria")
     private String nome;
 
     public Categoria(Integer id, String nome) {
