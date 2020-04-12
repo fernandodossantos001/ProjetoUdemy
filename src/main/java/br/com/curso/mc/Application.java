@@ -4,10 +4,7 @@ import br.com.curso.mc.entity.Categoria;
 import br.com.curso.mc.entity.Cidade;
 import br.com.curso.mc.entity.Estado;
 import br.com.curso.mc.entity.Produto;
-import br.com.curso.mc.repository.CategoriaRepository;
-import br.com.curso.mc.repository.CidadeRepository;
-import br.com.curso.mc.repository.EstadoRepository;
-import br.com.curso.mc.repository.ProdutoRepository;
+import br.com.curso.mc.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,6 +22,10 @@ public class Application implements CommandLineRunner {
     private EstadoRepository estadoRepository;
     @Autowired
     private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
 
 
     public static void main(String[] args){
@@ -33,6 +34,6 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-       PopulaBanco.createEsdadoAndCidade(cidadeRepository,estadoRepository);
+       PopulaBanco.createClienteAndEndereco(clienteRepository,enderecoRepository,cidadeRepository,estadoRepository);
     }
 }

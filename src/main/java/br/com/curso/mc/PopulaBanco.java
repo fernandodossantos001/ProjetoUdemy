@@ -1,20 +1,16 @@
 package br.com.curso.mc;
 
-import br.com.curso.mc.entity.Categoria;
-import br.com.curso.mc.entity.Cidade;
-import br.com.curso.mc.entity.Estado;
-import br.com.curso.mc.entity.Produto;
-import br.com.curso.mc.repository.CategoriaRepository;
-import br.com.curso.mc.repository.CidadeRepository;
-import br.com.curso.mc.repository.EstadoRepository;
-import br.com.curso.mc.repository.ProdutoRepository;
+import br.com.curso.mc.entity.*;
+import br.com.curso.mc.entity.enums.TipoCliente;
+import br.com.curso.mc.repository.*;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public class PopulaBanco {
 
 
-    public static void CreateCategoriaAndProduto(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository){
+    public static void createCategoriaAndProduto(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository){
         Categoria categoriainformatica= new Categoria("Informatica" );
         Categoria categoriaEscritorio = new Categoria("Escritorio" );
 
@@ -47,6 +43,43 @@ public class PopulaBanco {
 
         estadoRepository.saveAll(Arrays.asList(estadoMinas,estadoSaoPaulo));
         cidadeRepository.saveAll(Arrays.asList(cidadeUberlancia,cidadeCampinas,cidadeSaoPaulo));
+    }
+
+    public static void createClienteAndEndereco(ClienteRepository clienteRepository,
+                                                EnderecoRepository enderecoRepository,
+                                                CidadeRepository cidadeRepository,
+                                                EstadoRepository estadoRepository){
+        Cliente clienteMaria = new Cliente("Maria Silva", "maria@gmail.com"
+                ,"36378912377" , TipoCliente.PESSOAFISICA);
+
+        clienteMaria.getTelefones().addAll(Arrays.asList("27218996","11964842299"));
+
+
+        Optional<Estado> estadoMinas = estadoRepository.findById(1);
+        Optional<Estado> estadoSaoPaulo = estadoRepository.findById(2);
+        Optional<Cidade> cidadeUberlancia = cidadeRepository.findById(1);
+        Optional<Cidade> cidadeSaoPaulo = cidadeRepository.findById(3);
+
+
+        Endereco enderecoSaoPaulo = new Endereco("Rua Flores",
+                "300",
+                "apto 203",
+                "Jardim",
+                "0393020",
+                cidadeUberlancia.get(),
+                clienteMaria);
+        Endereco enderecoMinasGerais = new Endereco("Avenida Matos",
+                "105",
+                "sala 800",
+                "Centro",
+                "38777012",
+                cidadeSaoPaulo.get(),
+                clienteMaria);
+
+        clienteMaria.setEnderecos(Arrays.asList(enderecoSaoPaulo,enderecoMinasGerais));
+
+        clienteRepository.save(clienteMaria);
+        enderecoRepository.saveAll(Arrays.asList(enderecoMinasGerais,enderecoSaoPaulo));
     }
 
 }
