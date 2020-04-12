@@ -1,12 +1,26 @@
 package br.com.curso.mc.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "T_CATEGORIA")
 public class Categoria implements Serializable{
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_categoria")
     private Integer id;
+    @Column(name = "nm_categoria")
     private String nome;
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos;
+
 
     public Categoria(Integer id, String nome) {
         this.id = id;
@@ -14,7 +28,10 @@ public class Categoria implements Serializable{
     }
 
     public Categoria() {
+        produtos = new ArrayList<Produto>();
+    }
 
+    public Categoria(String nome) {
     }
 
     public Integer getId() {
@@ -31,6 +48,14 @@ public class Categoria implements Serializable{
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override
