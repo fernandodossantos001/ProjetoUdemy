@@ -1,6 +1,7 @@
 package br.com.curso.mc.entity;
 
 import br.com.curso.mc.entity.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,6 +22,7 @@ public class Cliente implements Serializable {
     private String cpnOuCnpj;
     @Column(name = "ds_tipo_cliente")
     private Integer tipoCliente;
+    @JsonManagedReference
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos;
     @ElementCollection
