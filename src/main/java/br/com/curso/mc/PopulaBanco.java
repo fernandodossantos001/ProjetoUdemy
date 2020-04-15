@@ -1,10 +1,14 @@
 package br.com.curso.mc;
 
 import br.com.curso.mc.entity.*;
+import br.com.curso.mc.entity.enums.EstadoPagamento;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import br.com.curso.mc.repository.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Optional;
 
 public class PopulaBanco {
@@ -82,4 +86,24 @@ public class PopulaBanco {
         enderecoRepository.saveAll(Arrays.asList(enderecoMinasGerais,enderecoSaoPaulo));
     }
 
+    public static void createPedido(PedidoRepository pedidoRepository,PagamentoRepository pagamentoRepository,ClienteRepository clienteRepository,EnderecoRepository enderecoRepository) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        Optional<Cliente> cliente = clienteRepository.findById(1);
+        Optional<Endereco> endereco1 = enderecoRepository.findById(1);
+        Optional<Endereco> endereco2 = enderecoRepository.findById(2);
+
+        Pedido pedido = new Pedido(dateFormat.parse("30/09/2019 10:32"),cliente.get(),endereco1.get());
+        Pedido pedido2 = new Pedido(dateFormat.parse("10/01/2019 19:54"),cliente.get(),endereco2.get());
+
+        Pagamento pagamentoCartao = new PagamentoComCartao(EstadoPagamento.QUITADO,pedido,6);
+        pedido.setPagamento(pagamentoCartao);
+
+        Pagamento pagamentoBoleto = new PagamentoComBoleto(EstadoPagamento.PENDENTE,pedido2,dateFormat.parse("13/01/2019 00:00"),null);
+        pedido2.setPagamento(pagamentoBoleto);
+
+        cliente.get().setPedidos(Arrays.asList(pedido,pedido2));
+
+        pedidoRepository.saveAll(Arrays.asList(pedido,pedido2));
+        pagamentoRepository.saveAll(Arrays.asList(pagamentoBoleto,pagamentoCartao));
+    }
 }

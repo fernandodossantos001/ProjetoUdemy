@@ -29,9 +29,13 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "t_telefone")
     private Set<String> telefones;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
+
     public Cliente() {
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
+        pedidos = new ArrayList<Pedido>();
     }
 
     public Cliente(String nome, String email, String cpnOuCnpj, TipoCliente tipoCliente) {
@@ -97,6 +101,18 @@ public class Cliente implements Serializable {
 
     public void setTelefones(Set<String> telefones) {
         this.telefones = telefones;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public void setTipoCliente(Integer tipoCliente) {
+        this.tipoCliente = tipoCliente;
     }
 
     @Override
