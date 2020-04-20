@@ -1,5 +1,7 @@
 package br.com.curso.mc.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -24,6 +26,7 @@ public class Endereco  implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
