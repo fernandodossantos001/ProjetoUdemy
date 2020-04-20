@@ -30,6 +30,8 @@ public class Application implements CommandLineRunner {
     private PagamentoRepository pagamentoRepository;
     @Autowired
     private PedidoRepository pedidoRepository;
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
 
     public static void main(String[] args){
@@ -38,6 +40,6 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        PopulaBanco.createPedido(pedidoRepository,pagamentoRepository, clienteRepository, enderecoRepository);
+        PopulaBanco.createItemPedido(pedidoRepository, produtoRepository, itemPedidoRepository);
     }
 }

@@ -1,9 +1,11 @@
 package br.com.curso.mc.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Table(name = "t_pedido")
@@ -26,7 +28,11 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "id_endereco_entrega")
     private Endereco enderecoEntraga;
 
+    @OneToMany(mappedBy = "id.pedido",fetch = FetchType.EAGER)
+    private Set<ItemPedido> itens = new HashSet<ItemPedido>();;
+
     public Pedido() {
+
     }
 
     public Pedido(Date instante, Pagamento pagamento, Cliente cliente, Endereco enderecoEntraga) {
@@ -82,6 +88,14 @@ public class Pedido implements Serializable {
         this.enderecoEntraga = enderecoEntraga;
     }
 
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,6 +110,6 @@ public class Pedido implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instante, pagamento, cliente, enderecoEntraga);
+        return Objects.hash(id);
     }
 }
