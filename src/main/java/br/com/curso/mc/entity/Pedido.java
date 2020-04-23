@@ -1,5 +1,6 @@
 package br.com.curso.mc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,21 +16,24 @@ public class Pedido implements Serializable {
     @Column(name = "id_pedido")
     private Integer id;
     @Column(name = "dt_instante")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private Date instante;
 
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "pedido")
+    @JsonManagedReference
     private Pagamento pagamento;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
+    @JsonManagedReference
     private Cliente cliente;
 
     @ManyToOne
     @JoinColumn(name = "id_endereco_entrega")
     private Endereco enderecoEntraga;
 
-    @OneToMany(mappedBy = "id.pedido",fetch = FetchType.EAGER)
-    private Set<ItemPedido> itens = new HashSet<ItemPedido>();;
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
     public Pedido() {
 
@@ -112,4 +116,5 @@ public class Pedido implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }

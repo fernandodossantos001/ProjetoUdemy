@@ -1,5 +1,7 @@
 package br.com.curso.mc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import java.io.Serializable;
@@ -8,7 +10,9 @@ import java.util.Objects;
 @Entity
 public class ItemPedido implements Serializable {
     @EmbeddedId
+    @JsonIgnore
     private ItemPedidoPk id = new ItemPedidoPk();
+
     private Double desconto;
     private Integer quantidade;
     private Double preco;
@@ -25,12 +29,25 @@ public class ItemPedido implements Serializable {
 
     }
 
+    @JsonIgnore
     public Pedido getPedido(){
         return id.getPedido();
     }
 
     public Produto getProduto(){
         return  id.getProduto();
+    }
+
+    public Double getDesconto() {
+        return desconto;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public Double getPreco() {
+        return preco;
     }
 
     @Override
@@ -44,9 +61,5 @@ public class ItemPedido implements Serializable {
                 Objects.equals(preco, that.preco);
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id, desconto, quantidade, preco);
-//    }
 
 }

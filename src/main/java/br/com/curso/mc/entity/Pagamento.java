@@ -1,5 +1,6 @@
 package br.com.curso.mc.entity;
 import br.com.curso.mc.entity.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,6 +19,7 @@ public abstract class Pagamento implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_pedido")
     @MapsId
+    @JsonBackReference
     private Pedido pedido;
 
     public Pagamento(EstadoPagamento estadoPagamento, Pedido pedido) {
