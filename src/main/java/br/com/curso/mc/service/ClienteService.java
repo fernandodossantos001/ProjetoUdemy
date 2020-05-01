@@ -13,11 +13,11 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    public Optional<Cliente> findById(Integer id){
+    public Cliente findById(Integer id){
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        return Optional.ofNullable(cliente.orElseThrow(() -> {
-            throw new ObjectNotFoundException("Objeto não encontrado id " + id + ", tipo " + Cliente.class.getSimpleName());
-        }));
+        return cliente.orElseThrow(() ->
+             new ObjectNotFoundException("Objeto não encontrado id " + id + ", tipo " + Cliente.class.getSimpleName()));
+
     }
 
 }
