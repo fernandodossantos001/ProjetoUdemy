@@ -40,6 +40,10 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+//        PopulaBanco.createCategoriaAndProduto(categoriaRepository,produtoRepository);
+//        PopulaBanco.createEsdadoAndCidade(cidadeRepository,estadoRepository);
+//        PopulaBanco.createClienteAndEndereco(clienteRepository,enderecoRepository,cidadeRepository,estadoRepository);
+//        PopulaBanco.createPedido(pedidoRepository,pagamentoRepository,clienteRepository,enderecoRepository);
 //        PopulaBanco.createItemPedido(pedidoRepository, produtoRepository, itemPedidoRepository);
     }
 }

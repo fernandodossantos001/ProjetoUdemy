@@ -32,7 +32,7 @@ public class Pedido implements Serializable {
     @JoinColumn(name = "id_endereco_entrega")
     private Endereco enderecoEntraga;
 
-    @OneToMany(mappedBy = "id.pedido")
+    @OneToMany(mappedBy = "id.pedido",fetch = FetchType.EAGER)
     private Set<ItemPedido> itens = new HashSet<ItemPedido>();
 
     public Pedido() {

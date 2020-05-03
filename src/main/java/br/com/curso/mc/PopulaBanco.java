@@ -105,6 +105,7 @@ public class PopulaBanco {
 
         pedidoRepository.saveAll(asList(pedido,pedido2));
         pagamentoRepository.saveAll(asList(pagamentoBoleto,pagamentoCartao));
+        clienteRepository.save(cliente.get());
 
     }
 
@@ -117,7 +118,7 @@ public class PopulaBanco {
 
         ItemPedido itemPedidoComputador = new ItemPedido(pedido.get(),computador.get(),0.0,1,2000.0);
         ItemPedido itemPedidoMouse = new ItemPedido(pedido.get(),mouse.get(),0.0,2,80.0);
-        ItemPedido itemPedidoImpressora = new ItemPedido(pedido.get(),impressora.get(),100.0,1,800.0);
+        ItemPedido itemPedidoImpressora = new ItemPedido(pedido2.get(),impressora.get(),100.0,1,800.0);
 
         pedido.get().getItens().addAll(Arrays.asList(itemPedidoComputador,itemPedidoMouse));
 
