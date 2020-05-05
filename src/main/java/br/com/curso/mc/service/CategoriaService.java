@@ -4,6 +4,9 @@ import br.com.curso.mc.entity.Categoria;
 import br.com.curso.mc.exception.ObjectNotFoundException;
 import br.com.curso.mc.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,5 +38,10 @@ public class CategoriaService {
 
     public List<Categoria> findAll() {
         return repository.findAll();
+    }
+
+    public Page<Categoria> findAllByPage(Integer page, Integer linePerPage,String orderBy,String direction){
+        PageRequest pageRequest = PageRequest.of(page,linePerPage, Sort.Direction.valueOf(direction),orderBy);
+        return repository.findAll(pageRequest);
     }
 }
