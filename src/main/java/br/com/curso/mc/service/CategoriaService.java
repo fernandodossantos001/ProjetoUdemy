@@ -6,6 +6,7 @@ import br.com.curso.mc.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,5 +26,14 @@ public class CategoriaService {
     public Categoria update(Categoria categoria) {
         findById(categoria.getId());
         return repository.save(categoria);
+    }
+
+    public void deleteById(Integer id) {
+        findById(id);
+        repository.deleteById(id);
+    }
+
+    public List<Categoria> findAll() {
+        return repository.findAll();
     }
 }
