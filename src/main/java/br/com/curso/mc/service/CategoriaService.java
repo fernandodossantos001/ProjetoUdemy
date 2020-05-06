@@ -1,5 +1,6 @@
 package br.com.curso.mc.service;
 
+import br.com.curso.mc.dto.CategoriaDTO;
 import br.com.curso.mc.entity.Categoria;
 import br.com.curso.mc.exception.ObjectNotFoundException;
 import br.com.curso.mc.repository.CategoriaRepository;
@@ -43,5 +44,9 @@ public class CategoriaService {
     public Page<Categoria> findAllByPage(Integer page, Integer linePerPage,String orderBy,String direction){
         PageRequest pageRequest = PageRequest.of(page,linePerPage, Sort.Direction.valueOf(direction),orderBy);
         return repository.findAll(pageRequest);
+    }
+
+    public Categoria fromDTO(CategoriaDTO categoriaDTO){
+        return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
     }
 }
