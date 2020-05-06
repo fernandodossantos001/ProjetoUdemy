@@ -4,6 +4,8 @@ import br.com.curso.mc.exception.ObjectNotFoundException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -26,5 +28,17 @@ public class ResourceExceptionHandler {
             StandardError standardError = new StandardError(HttpStatus.BAD_REQUEST.value(),constraintViolationException.getCause().getMessage(),Calendar.getInstance());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(standardError);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<StandardError> validationViolation(MethodArgumentNotValidException e
+            , HttpServletRequest request){
+
+            ValidationError validationViolation = new ValidationError(HttpStatus.BAD_REQUEST.value(),"Erro de validação !",Calendar.getInstance());
+
+            for(FieldError fieldError : e.getBindingResult().getFieldErrors()){
+                validationViolation.addError(fieldError.getField(),fieldError.getDefaultMessage());
+            }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(validationViolation);
     }
 }
