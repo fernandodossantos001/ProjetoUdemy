@@ -44,7 +44,7 @@ public class Cliente implements Serializable {
         this.nome = nome;
         this.email = email;
         this.cpnOuCnpj = cpnOuCnpj;
-        this.tipoCliente = tipoCliente.getCodigo();
+        this.tipoCliente = (tipoCliente==null) ? null: tipoCliente.getCodigo();
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
     }
