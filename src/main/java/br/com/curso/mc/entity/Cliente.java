@@ -19,7 +19,7 @@ public class Cliente implements Serializable {
     private String nome;
     @Column(name = "ds_email")
     private String email;
-    @Column(name = "ds_cpn_cnpj")
+    @Column(name = "ds_cpf_cnpj")
     private String cpnOuCnpj;
     @Column(name = "ds_tipo_cliente")
     private Integer tipoCliente;
