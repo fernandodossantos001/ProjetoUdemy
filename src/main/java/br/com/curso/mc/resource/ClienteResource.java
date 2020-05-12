@@ -1,6 +1,7 @@
 package br.com.curso.mc.resource;
 
 import br.com.curso.mc.dto.ClienteDTO;
+import br.com.curso.mc.dto.ClienteNewDTO;
 import br.com.curso.mc.entity.Cliente;
 import br.com.curso.mc.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveClient(@RequestBody ClienteDTO clienteDTO){
+    public ResponseEntity<Void> saveClient(@RequestBody ClienteNewDTO clienteDTO){
         Cliente cliente = clienteService.fromDTO(clienteDTO);
         clienteService.saveClient(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
