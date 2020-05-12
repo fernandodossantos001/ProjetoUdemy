@@ -64,9 +64,7 @@ public class ClienteService {
 
 
     public Cliente saveClient(Cliente cliente) {
-        Cliente clientSaved = clienteRepository.save(cliente);
-        enderecoService.save(cliente.getEnderecos());
-        return clientSaved;
+        return clienteRepository.save(cliente);
     }
 
     public void delete(Integer id) {
