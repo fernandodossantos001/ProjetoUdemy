@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +47,7 @@ public class ClienteResource {
     }
 
     @PostMapping
-    public ResponseEntity<Void> saveClient(@RequestBody ClienteNewDTO clienteDTO){
+    public ResponseEntity<Void> saveClient(@RequestBody @Valid ClienteNewDTO clienteDTO){
         Cliente cliente = clienteService.fromDTO(clienteDTO);
         clienteService.saveClient(cliente);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -55,7 +56,7 @@ public class ClienteResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateClient(@RequestBody ClienteDTO clienteDTO,@PathVariable Integer id ){
+    public ResponseEntity<Void> updateClient(@RequestBody @Valid ClienteDTO clienteDTO,@PathVariable Integer id ){
         Cliente cliente = clienteService.fromDTO(clienteDTO);
         cliente.setId(id);
         clienteService.update(cliente);

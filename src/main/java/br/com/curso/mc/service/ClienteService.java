@@ -7,7 +7,6 @@ import br.com.curso.mc.entity.Cliente;
 import br.com.curso.mc.entity.Endereco;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import br.com.curso.mc.exception.ObjectNotFoundException;
-import br.com.curso.mc.repository.CidadeRepository;
 import br.com.curso.mc.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -46,7 +45,7 @@ public class ClienteService {
 
     public Cliente fromDTO(ClienteNewDTO clientenewDTO){
          Cliente cliente = new Cliente(clientenewDTO.getNome(),clientenewDTO.getEmail(),
-                 clientenewDTO.getCpnOuCnpj(), TipoCliente.toEnum(clientenewDTO.getTipoCliente()));
+                 clientenewDTO.getCpfOuCnpj(), TipoCliente.toEnum(clientenewDTO.getTipoCliente()));
         Cidade cidade = cidadeService.findById(clientenewDTO.getIdCidade());
         Endereco endereco = new Endereco(clientenewDTO.getLogradouro(),clientenewDTO.getNumero(),clientenewDTO.getComplemento(),
                 clientenewDTO.getBairro(),clientenewDTO.getCep(),cidade,cliente);

@@ -1,22 +1,41 @@
 package br.com.curso.mc.dto;
 
-import javax.persistence.Column;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class ClienteNewDTO implements Serializable {
 
+    @NotNull(message = "Preenchimento Obrigatório")
+    @NotEmpty(message = "O nome não pode estar vazio")
+    @Length(min = 5,max = 120 , message = "O nome precisar ter entre 5 e 120 caracteres")
     private String nome;
+    @NotNull(message = "Preenchimento Obrigatório")
+    @Email(message = "Email inválido")
     private String email;
-    private String cpnOuCnpj;
+    @NotEmpty(message = "O CPF/CNPJ não poder estar vazio")
+    @NotNull(message = "Preenchimento Obrigatório")
+    private String cpfOuCnpj;
+    @NotNull(message = "Preenchimento Obrigatório")
     private Integer tipoCliente;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String logradouro;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String numero;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String complemento;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String bairro;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String cep;
+    @NotNull(message = "Preenchimento Obrigatório")
     private String telefone;
     private String telefone2;
     private String telefone3;
+    @NotNull(message = "Preenchimento Obrigatório")
     private Integer idCidade;
 
     public ClienteNewDTO(){
@@ -28,7 +47,7 @@ public class ClienteNewDTO implements Serializable {
                          String cep, String telefone, String telefone2, String telefone3, Integer idCidade) {
         this.nome = nome;
         this.email = email;
-        this.cpnOuCnpj = cpnOuCnpj;
+        this.cpfOuCnpj = cpnOuCnpj;
         this.tipoCliente = tipoCliente;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -57,12 +76,12 @@ public class ClienteNewDTO implements Serializable {
         this.email = email;
     }
 
-    public String getCpnOuCnpj() {
-        return cpnOuCnpj;
+    public String getCpfOuCnpj() {
+        return cpfOuCnpj;
     }
 
-    public void setCpnOuCnpj(String cpnOuCnpj) {
-        this.cpnOuCnpj = cpnOuCnpj;
+    public void setCpfOuCnpj(String cpfOuCnpj) {
+        this.cpfOuCnpj = cpfOuCnpj;
     }
 
     public Integer getTipoCliente() {
