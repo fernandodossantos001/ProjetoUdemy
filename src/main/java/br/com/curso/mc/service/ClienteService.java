@@ -85,4 +85,8 @@ public class ClienteService {
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
     }
+
+    public Cliente findByEmail(String email){
+        return clienteRepository.findByEmail(email);
+    }
 }

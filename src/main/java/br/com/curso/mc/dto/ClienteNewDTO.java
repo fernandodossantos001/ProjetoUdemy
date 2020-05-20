@@ -1,12 +1,13 @@
 package br.com.curso.mc.dto;
 
+import br.com.curso.mc.service.validation.ClientInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
+@ClientInsert
 public class ClienteNewDTO implements Serializable {
 
     @NotNull(message = "Preenchimento Obrigatório")
