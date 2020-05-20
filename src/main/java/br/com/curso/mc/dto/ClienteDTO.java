@@ -1,13 +1,14 @@
 package br.com.curso.mc.dto;
 
 import br.com.curso.mc.entity.Cliente;
+import br.com.curso.mc.service.validation.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-
+@ClientUpdate
 public class ClienteDTO implements Serializable {
     private Integer id;
     @NotNull(message = "O nome não pode ser nulo")
