@@ -54,4 +54,8 @@ public class CategoriaService {
     public Categoria fromDTO(CategoriaDTO categoriaDTO){
         return new Categoria(categoriaDTO.getId(),categoriaDTO.getNome());
     }
+
+    public List<Categoria> findAllById(List<Integer> ids){
+        return repository.findAllById(ids);
+    }
 }
