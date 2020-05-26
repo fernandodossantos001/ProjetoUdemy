@@ -1,6 +1,8 @@
 package br.com.curso.mc.entity;
 import br.com.curso.mc.entity.enums.EstadoPagamento;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +11,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "t_pagamento")
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,include = JsonTypeInfo.As.PROPERTY,property = "@type")
 public abstract class Pagamento implements Serializable {
     @Id
     @Column(name = "id_pagamento")
@@ -19,7 +22,7 @@ public abstract class Pagamento implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_pedido")
     @MapsId
-    @JsonBackReference
+    @JsonIgnore
     private Pedido pedido;
 
     public Pagamento(EstadoPagamento estadoPagamento, Pedido pedido) {

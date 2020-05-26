@@ -53,7 +53,27 @@ public class ItemPedido implements Serializable {
     public Double getPreco() {
         return preco;
     }
-    
+
+    public void setPedido(Pedido pedido){
+        id.setPedido(pedido);
+    }
+
+    public void setProduto(Produto produto){
+        id.setProduto(produto);
+    }
+
+    public void setDesconto(Double desconto){
+        this.desconto = desconto;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

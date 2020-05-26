@@ -2,6 +2,7 @@ package br.com.curso.mc.entity;
 
 import br.com.curso.mc.entity.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -23,7 +24,6 @@ public class Cliente implements Serializable {
     private String cpnOuCnpj;
     @Column(name = "ds_tipo_cliente")
     private Integer tipoCliente;
-    @JsonManagedReference
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<Endereco> enderecos;
     @ElementCollection
@@ -31,7 +31,7 @@ public class Cliente implements Serializable {
     private Set<String> telefones;
 
     @OneToMany(mappedBy = "cliente")
-    @JsonBackReference
+    @JsonIgnore
     private List<Pedido> pedidos;
 
     public Cliente() {
@@ -85,9 +85,9 @@ public class Cliente implements Serializable {
         return TipoCliente.toEnum(tipoCliente);
     }
 
-    public void setTipoCliente(TipoCliente tipoCliente) {
-        this.tipoCliente = tipoCliente.getCodigo();
-    }
+//    public void setTipoCliente(TipoCliente tipoCliente) {
+//        this.tipoCliente = tipoCliente.getCodigo();
+//    }
 
     public List<Endereco> getEnderecos() {
         return enderecos;
