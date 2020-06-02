@@ -15,7 +15,7 @@
     <description>Project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
     </properties>
 
     <dependencies>
@@ -75,9 +75,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <verbose>true</verbose>
-                    <fork>true</fork>
-                    <compilerVersion>1.8</compilerVersion>
+                    <compilerVersion>11</compilerVersion>
                 </configuration>
             </plugin>
         </plugins>
