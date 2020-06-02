@@ -4,6 +4,8 @@ import br.com.curso.mc.entity.*;
 import br.com.curso.mc.entity.enums.EstadoPagamento;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import br.com.curso.mc.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,10 +13,29 @@ import java.util.*;
 
 import static java.util.Arrays.*;
 
-public class PopulaBanco {
 
+@Service
+public class PopulaBancoService {
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    @Autowired
+    private ProdutoRepository produtoRepository;
+    @Autowired
+    private EstadoRepository estadoRepository;
+    @Autowired
+    private CidadeRepository cidadeRepository;
+    @Autowired
+    private ClienteRepository clienteRepository;
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+    @Autowired
+    private PagamentoRepository pagamentoRepository;
+    @Autowired
+    private PedidoRepository pedidoRepository;
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
-    public static void createCategoriaAndProduto(CategoriaRepository categoriaRepository, ProdutoRepository produtoRepository){
+    public void createCategoriaAndProduto(){
         Categoria categoriainformatica= new Categoria("Informatica" );
         Categoria categoriaEscritorio = new Categoria("Escritorio" );
 
@@ -34,7 +55,7 @@ public class PopulaBanco {
         produtoRepository.saveAll(asList(produtoImpressora,produtoComputador,produtoMouse));
     }
 
-    public static void createEsdadoAndCidade(CidadeRepository cidadeRepository, EstadoRepository estadoRepository){
+    public  void createEsdadoAndCidade(){
         Estado estadoMinas = new Estado("Minas Gerais");
         Estado estadoSaoPaulo = new Estado("Sao Paulo");
 
@@ -49,10 +70,7 @@ public class PopulaBanco {
         cidadeRepository.saveAll(asList(cidadeUberlancia,cidadeCampinas,cidadeSaoPaulo));
     }
 
-    public static void createClienteAndEndereco(ClienteRepository clienteRepository,
-                                                EnderecoRepository enderecoRepository,
-                                                CidadeRepository cidadeRepository,
-                                                EstadoRepository estadoRepository){
+    public void createClienteAndEndereco(){
         Cliente clienteMaria = new Cliente("Maria Silva", "maria@gmail.com"
                 ,"36378912377" , TipoCliente.PESSOAFISICA);
 
@@ -86,7 +104,7 @@ public class PopulaBanco {
         enderecoRepository.saveAll(asList(enderecoMinasGerais,enderecoSaoPaulo));
     }
 
-    public static void createPedido(PedidoRepository pedidoRepository,PagamentoRepository pagamentoRepository,ClienteRepository clienteRepository,EnderecoRepository enderecoRepository) throws ParseException {
+    public void createPedido() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         Optional<Cliente> cliente = clienteRepository.findById(1);
         Optional<Endereco> endereco1 = enderecoRepository.findById(1);
@@ -109,7 +127,7 @@ public class PopulaBanco {
 
     }
 
-    public static void createItemPedido(PedidoRepository pedidoRepository,ProdutoRepository produtoRepository,ItemPedidoRepository itemPedidoRepository){
+    public void createItemPedido(){
         Optional<Pedido> pedido = pedidoRepository.findById(1);
         Optional<Pedido> pedido2 = pedidoRepository.findById(2);
         Optional<Produto> impressora = produtoRepository.findById(1);

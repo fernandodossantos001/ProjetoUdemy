@@ -14,25 +14,6 @@ import java.util.Arrays;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
-    @Autowired
-    private  CategoriaRepository categoriaRepository;
-    @Autowired
-    private ProdutoRepository produtoRepository;
-    @Autowired
-    private EstadoRepository estadoRepository;
-    @Autowired
-    private CidadeRepository cidadeRepository;
-    @Autowired
-    private ClienteRepository clienteRepository;
-    @Autowired
-    private EnderecoRepository enderecoRepository;
-    @Autowired
-    private PagamentoRepository pagamentoRepository;
-    @Autowired
-    private PedidoRepository pedidoRepository;
-    @Autowired
-    private ItemPedidoRepository itemPedidoRepository;
-
 
     public static void main(String[] args){
         SpringApplication.run(Application.class, args);
@@ -40,10 +21,6 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        PopulaBanco.createCategoriaAndProduto(categoriaRepository,produtoRepository);
-//        PopulaBanco.createEsdadoAndCidade(cidadeRepository,estadoRepository);
-//        PopulaBanco.createClienteAndEndereco(clienteRepository,enderecoRepository,cidadeRepository,estadoRepository);
-//        PopulaBanco.createPedido(pedidoRepository,pagamentoRepository,clienteRepository,enderecoRepository);
-//        PopulaBanco.createItemPedido(pedidoRepository, produtoRepository, itemPedidoRepository);
+
     }
 }
