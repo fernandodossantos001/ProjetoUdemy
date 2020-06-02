@@ -1,9 +1,7 @@
 package br.com.curso.mc.entity;
 
 import br.com.curso.mc.entity.enums.TipoCliente;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +19,7 @@ public class Cliente implements Serializable {
     @Column(name = "ds_email")
     private String email;
     @Column(name = "ds_cpf_cnpj")
-    private String cpnOuCnpj;
+    private String cpfOuCnpj;
     @Column(name = "ds_tipo_cliente")
     private Integer tipoCliente;
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
@@ -43,7 +41,7 @@ public class Cliente implements Serializable {
     public Cliente(String nome, String email, String cpnOuCnpj, TipoCliente tipoCliente) {
         this.nome = nome;
         this.email = email;
-        this.cpnOuCnpj = cpnOuCnpj;
+        this.cpfOuCnpj = cpnOuCnpj;
         this.tipoCliente = (tipoCliente==null) ? null: tipoCliente.getCodigo();
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
@@ -73,12 +71,12 @@ public class Cliente implements Serializable {
         this.email = email;
     }
 
-    public String getCpnOuCnpj() {
-        return cpnOuCnpj;
+    public String getCpfOuCnpj() {
+        return cpfOuCnpj;
     }
 
-    public void setCpnOuCnpj(String cpnOuCnpj) {
-        this.cpnOuCnpj = cpnOuCnpj;
+    public void setCpfOuCnpj(String cpfOuCnpj) {
+        this.cpfOuCnpj = cpfOuCnpj;
     }
 
     public TipoCliente getTipoCliente() {
@@ -125,7 +123,7 @@ public class Cliente implements Serializable {
         return Objects.equals(id, cliente.id) &&
                 Objects.equals(nome, cliente.nome) &&
                 Objects.equals(email, cliente.email) &&
-                Objects.equals(cpnOuCnpj, cliente.cpnOuCnpj) &&
+                Objects.equals(cpfOuCnpj, cliente.cpfOuCnpj) &&
                 Objects.equals(tipoCliente, cliente.tipoCliente) &&
                 Objects.equals(enderecos, cliente.enderecos) &&
                 Objects.equals(telefones, cliente.telefones);
@@ -133,6 +131,6 @@ public class Cliente implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, email, cpnOuCnpj, tipoCliente, enderecos, telefones);
+        return Objects.hash(id, nome, email, cpfOuCnpj, tipoCliente, enderecos, telefones);
     }
 }
