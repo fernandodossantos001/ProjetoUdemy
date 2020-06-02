@@ -78,7 +78,7 @@
                 <configuration>
                     <verbose>true</verbose>
                     <fork>true</fork>
-                    <compilerVersion>11</compilerVersion>
+                    <compilerVersion>1.8</compilerVersion>
                 </configuration>
             </plugin>
         </plugins>
