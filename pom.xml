@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <maven.compile.target>11</maven.compile.target>
     </properties>
 
     <dependencies>
@@ -59,6 +60,15 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
