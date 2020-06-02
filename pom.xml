@@ -10,7 +10,7 @@
     </parent>
     <groupId>br.com.curso</groupId>
     <artifactId>cursomc</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>release-1.0.0</version>
     <name>cursomc</name>
     <description>Project for Spring Boot</description>
 
