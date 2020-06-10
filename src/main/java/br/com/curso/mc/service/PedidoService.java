@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PedidoService {
@@ -36,6 +38,7 @@ public class PedidoService {
     public Pedido insert(Pedido pedido) {
         pedido.setId(null);
         pedido.setInstante(new Date());
+        pedido.setCliente(clienteService.findById(pedido.getCliente().getId()));
         pedido.getPagamento().setEstadoPagamento(EstadoPagamento.PENDENTE);
         pedido.getPagamento().setPedido(pedido);
 
@@ -45,12 +48,16 @@ public class PedidoService {
         }
 
         Pedido savedPedido = pedidoRepository.save(pedido);
+        Set<ItemPedido> itens = new HashSet<ItemPedido>();
         for(ItemPedido itemPedido: pedido.getItens()){
             itemPedido.setDesconto(0.0);
-            itemPedido.setPreco(produtoService.findById(itemPedido.getProduto().getId()).getPreco());
+            itemPedido.setProduto(produtoService.findById(itemPedido.getProduto().getId()));
+            itemPedido.setPreco(itemPedido.getProduto().getPreco());
             itemPedido.setPedido(pedido);
         }
         itemPedidoService.saveItemPedido(pedido.getItens());
+
+        System.out.println(pedido);
         return pedido;
     }
 }

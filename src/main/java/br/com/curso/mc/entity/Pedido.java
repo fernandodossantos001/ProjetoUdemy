@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
@@ -123,4 +126,23 @@ public class Pedido implements Serializable {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        final NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+        final DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        final StringBuffer sb = new StringBuffer("Pedido{");
+        sb.append("Número do pedido: ");
+        sb.append(getId());
+        sb.append(", Instante: ");
+        sb.append(sdf.format(getInstante()));
+        sb.append(", Cliente: ");
+        sb.append(getCliente().getNome());
+        sb.append(", Estado Pagamento");
+        sb.append(getPagamento().getEstadoPagamento().getEstado());
+        sb.append("\nDetalhes\n");
+        getItens().forEach(p -> sb.append(p.toString()));
+        sb.append("Valor Total: ");
+        sb.append(nf.format(getValorTotal()));
+        return sb.toString();
+    }
 }
