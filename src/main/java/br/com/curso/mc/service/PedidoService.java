@@ -1,6 +1,8 @@
 package br.com.curso.mc.service;
 
-import br.com.curso.mc.entity.*;
+import br.com.curso.mc.entity.ItemPedido;
+import br.com.curso.mc.entity.PagamentoComBoleto;
+import br.com.curso.mc.entity.Pedido;
 import br.com.curso.mc.entity.enums.EstadoPagamento;
 import br.com.curso.mc.exception.ObjectNotFoundException;
 import br.com.curso.mc.repository.PedidoRepository;
@@ -29,6 +31,9 @@ public class PedidoService {
     @Autowired
     private ItemPedidoService itemPedidoService;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pedido findById(Integer id){
         Optional<Pedido> pedido = pedidoRepository.findById(id);
         return pedido.orElseThrow(() -> new ObjectNotFoundException(
@@ -56,8 +61,7 @@ public class PedidoService {
             itemPedido.setPedido(pedido);
         }
         itemPedidoService.saveItemPedido(pedido.getItens());
-
-        System.out.println(pedido);
+        emailService.sendOrderConfirmationEmail(pedido);
         return pedido;
     }
 }

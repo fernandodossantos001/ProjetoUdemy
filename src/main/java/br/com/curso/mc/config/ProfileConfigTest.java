@@ -1,6 +1,8 @@
 package br.com.curso.mc.config;
 
 import br.com.curso.mc.PopulaBancoService;
+import br.com.curso.mc.service.EmailService;
+import br.com.curso.mc.service.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,5 +24,10 @@ public class ProfileConfigTest {
         populaBancoService.createPedido();
         populaBancoService.createItemPedido();
         return Boolean.TRUE;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }
