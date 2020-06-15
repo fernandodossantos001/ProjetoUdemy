@@ -1,9 +1,7 @@
 package br.com.curso.mc.service.validation;
 
 import br.com.curso.mc.dto.ClienteNewDTO;
-import br.com.curso.mc.entity.Cliente;
 import br.com.curso.mc.entity.enums.TipoCliente;
-import br.com.curso.mc.repository.ClienteRepository;
 import br.com.curso.mc.resource.HandlerException.FieldMessage;
 import br.com.curso.mc.service.ClienteService;
 import br.com.curso.mc.service.validation.utils.ValidationCpfCnpj;
@@ -37,7 +35,7 @@ public class ClientInsertValidator implements ConstraintValidator<ClientInsert, 
         }
 
         if(null != service.findByEmail(clienteNewDTO.getEmail())){
-            list.add(new FieldMessage("email","Já existe um cliente com esse email"));
+            list.add(new FieldMessage("templates/email","Já existe um cliente com esse email"));
         }
 
         for (FieldMessage e : list) {
