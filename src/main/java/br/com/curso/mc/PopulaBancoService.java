@@ -5,6 +5,7 @@ import br.com.curso.mc.entity.enums.EstadoPagamento;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import br.com.curso.mc.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -34,6 +35,8 @@ public class PopulaBancoService {
     private PedidoRepository pedidoRepository;
     @Autowired
     private ItemPedidoRepository itemPedidoRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void createCategoriaAndProduto(){
         Categoria categoriainformatica= new Categoria("Informatica" );
@@ -71,7 +74,7 @@ public class PopulaBancoService {
     }
 
     public void createClienteAndEndereco(){
-        Cliente clienteMaria = new Cliente("Maria Silva", "maria@gmail.com"
+        Cliente clienteMaria = new Cliente("Maria Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"maria@gmail.com"
                 ,"36378912377" , TipoCliente.PESSOAFISICA);
 
         clienteMaria.getTelefones().addAll(asList("27218996","11964842299"));

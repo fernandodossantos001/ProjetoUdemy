@@ -38,6 +38,9 @@ public class ClienteNewDTO implements Serializable {
     private String telefone3;
     @NotNull(message = "Preenchimento Obrigatório")
     private Integer idCidade;
+    @NotNull
+    @NotEmpty
+    private String senha;
 
     public ClienteNewDTO(){
 
@@ -47,6 +50,25 @@ public class ClienteNewDTO implements Serializable {
                          String logradouro, String numero, String complemento, String bairro,
                          String cep, String telefone, String telefone2, String telefone3, Integer idCidade) {
         this.nome = nome;
+        this.email = email;
+        this.cpfOuCnpj = cpnOuCnpj;
+        this.tipoCliente = tipoCliente;
+        this.logradouro = logradouro;
+        this.numero = numero;
+        this.complemento = complemento;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.telefone = telefone;
+        this.telefone2 = telefone2;
+        this.telefone3 = telefone3;
+        this.idCidade = idCidade;
+    }
+
+    public ClienteNewDTO(String nome,String senha, String email, String cpnOuCnpj, Integer tipoCliente,
+                         String logradouro, String numero, String complemento, String bairro,
+                         String cep, String telefone, String telefone2, String telefone3, Integer idCidade) {
+        this.nome = nome;
+        this.senha = senha;
         this.email = email;
         this.cpfOuCnpj = cpnOuCnpj;
         this.tipoCliente = tipoCliente;
@@ -163,5 +185,13 @@ public class ClienteNewDTO implements Serializable {
 
     public void setIdCidade(Integer idCidade) {
         this.idCidade = idCidade;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }

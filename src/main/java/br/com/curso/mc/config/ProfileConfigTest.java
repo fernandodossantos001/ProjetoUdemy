@@ -3,6 +3,7 @@ package br.com.curso.mc.config;
 import br.com.curso.mc.PopulaBancoService;
 import br.com.curso.mc.service.EmailService;
 import br.com.curso.mc.service.MockEmailService;
+import br.com.curso.mc.service.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,5 +30,9 @@ public class ProfileConfigTest {
     @Bean
     public EmailService emailService(){
         return new MockEmailService();
+    }
+    @Bean
+    public SmtpEmailService smtpEmailService(){
+        return new SmtpEmailService();
     }
 }
