@@ -1,11 +1,13 @@
 package br.com.curso.mc.entity;
 
+import br.com.curso.mc.entity.enums.Perfil;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "t_cliente")
@@ -33,11 +35,16 @@ public class Cliente implements Serializable {
     private List<Pedido> pedidos;
     @JsonIgnore
     private String senha;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "t_perfis")
+    private Set<Integer> perfis;
 
     public Cliente() {
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
         pedidos = new ArrayList<Pedido>();
+        perfis = new HashSet<Integer>();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(String nome, String email, String cpnOuCnpj, TipoCliente tipoCliente) {
@@ -47,6 +54,8 @@ public class Cliente implements Serializable {
         this.tipoCliente = (tipoCliente==null) ? null: tipoCliente.getCodigo();
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
+        perfis = new HashSet<Integer>();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Cliente(String nome,String senha, String email, String cpnOuCnpj, TipoCliente tipoCliente) {
@@ -57,6 +66,8 @@ public class Cliente implements Serializable {
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
         this.senha = senha;
+        perfis = new HashSet<Integer>();
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -133,6 +144,14 @@ public class Cliente implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Set<Perfil> getPerfis(){
+        return perfis.stream().map(perfil -> Perfil.toEnum(perfil)).collect(Collectors.toSet());
+    }
+
+    public void addPerfil(Perfil perfil){
+        perfis.add(perfil.getCodigo());
     }
 
     @Override

@@ -2,6 +2,7 @@ package br.com.curso.mc;
 
 import br.com.curso.mc.entity.*;
 import br.com.curso.mc.entity.enums.EstadoPagamento;
+import br.com.curso.mc.entity.enums.Perfil;
 import br.com.curso.mc.entity.enums.TipoCliente;
 import br.com.curso.mc.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +75,16 @@ public class PopulaBancoService {
     }
 
     public void createClienteAndEndereco(){
-        Cliente clienteMaria = new Cliente("Maria Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"maria@gmail.com"
+        Cliente clienteMaria = new Cliente("Maria Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"fernandodossantos001@gmail.com.br"
                 ,"36378912377" , TipoCliente.PESSOAFISICA);
 
+        Cliente clienteAna = new Cliente("Ana Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"fernandodossantos001@gmail.com"
+                ,"91980729000" , TipoCliente.PESSOAFISICA);
+
+        clienteAna.addPerfil(Perfil.ADMIN);
+
         clienteMaria.getTelefones().addAll(asList("27218996","11964842299"));
+        clienteAna.getTelefones().addAll(asList("27218996","11964842299"));
 
 
         Optional<Estado> estadoMinas = estadoRepository.findById(1);
@@ -93,7 +100,7 @@ public class PopulaBancoService {
                 "0393020",
                 cidadeUberlancia.get(),
                 clienteMaria);
-        Endereco enderecoMinasGerais = new Endereco("Avenida Matos",
+        Endereco enderecoMinasGerais = new Endereco("Avenida Xpto",
                 "105",
                 "sala 800",
                 "Centro",
@@ -101,10 +108,28 @@ public class PopulaBancoService {
                 cidadeSaoPaulo.get(),
                 clienteMaria);
 
+        Endereco enderecoSaoPauloAna = new Endereco("Rua Xpto",
+                "300",
+                "apto 203",
+                "Jardim",
+                "0393020",
+                cidadeUberlancia.get(),
+                clienteAna);
+        Endereco enderecoMinasGeraisAna = new Endereco("Avenida Matos",
+                "105",
+                "sala 800",
+                "Centro",
+                "38777012",
+                cidadeSaoPaulo.get(),
+                clienteAna);
+
         clienteMaria.setEnderecos(asList(enderecoSaoPaulo,enderecoMinasGerais));
+        clienteAna.setEnderecos(asList(enderecoSaoPauloAna,enderecoMinasGeraisAna));
 
         clienteRepository.save(clienteMaria);
+        clienteRepository.save(clienteAna);
         enderecoRepository.saveAll(asList(enderecoMinasGerais,enderecoSaoPaulo));
+        enderecoRepository.saveAll(asList(enderecoMinasGeraisAna,enderecoSaoPauloAna));
     }
 
     public void createPedido() throws ParseException {
