@@ -19,11 +19,11 @@ public class ProfileConfigTest {
     private PopulaBancoService populaBancoService;
     @Bean
     public Boolean instantiateDataBase() throws ParseException {
-        populaBancoService.createCategoriaAndProduto();
-        populaBancoService.createEsdadoAndCidade();
-        populaBancoService.createClienteAndEndereco();
-        populaBancoService.createPedido();
-        populaBancoService.createItemPedido();
+//        populaBancoService.createCategoriaAndProduto();
+//        populaBancoService.createEsdadoAndCidade();
+//        populaBancoService.createClienteAndEndereco();
+//        populaBancoService.createPedido();
+//        populaBancoService.createItemPedido();
         return Boolean.TRUE;
     }
 

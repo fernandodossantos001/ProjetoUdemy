@@ -1,8 +1,8 @@
 package br.com.curso.mc.entity.enums;
 
 public enum Perfil {
-    ADMIN(0,"ROLE_ADMIN"),
-    CLIENTE(1,"ROLE_CLIENTE");
+    ADMIN(1,"ROLE_ADMIN"),
+    CLIENTE(2,"ROLE_CLIENTE");
 
     private Integer codigo;
     private String descricao;

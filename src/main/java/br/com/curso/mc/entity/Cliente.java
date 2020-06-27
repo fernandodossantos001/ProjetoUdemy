@@ -37,13 +37,12 @@ public class Cliente implements Serializable {
     private String senha;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "t_perfis")
-    private Set<Integer> perfis;
+    private Set<Integer> perfis = new HashSet<Integer>();;
 
     public Cliente() {
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
         pedidos = new ArrayList<Pedido>();
-        perfis = new HashSet<Integer>();
         addPerfil(Perfil.CLIENTE);
     }
 
@@ -54,7 +53,6 @@ public class Cliente implements Serializable {
         this.tipoCliente = (tipoCliente==null) ? null: tipoCliente.getCodigo();
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
-        perfis = new HashSet<Integer>();
         addPerfil(Perfil.CLIENTE);
     }
 
@@ -66,7 +64,6 @@ public class Cliente implements Serializable {
         enderecos = new ArrayList<Endereco>();
         telefones = new HashSet<String>();
         this.senha = senha;
-        perfis = new HashSet<Integer>();
         addPerfil(Perfil.CLIENTE);
     }
 

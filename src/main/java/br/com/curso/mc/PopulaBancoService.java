@@ -75,10 +75,10 @@ public class PopulaBancoService {
     }
 
     public void createClienteAndEndereco(){
-        Cliente clienteMaria = new Cliente("Maria Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"fernandodossantos001@gmail.com.br"
+        Cliente clienteMaria = new Cliente("Maria Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"cliente5@gmail.com"
                 ,"36378912377" , TipoCliente.PESSOAFISICA);
 
-        Cliente clienteAna = new Cliente("Ana Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"fernandodossantos001@gmail.com"
+        Cliente clienteAna = new Cliente("Ana Silva",bCryptPasswordEncoder.encode("fernandoRibeiro") ,"cliente6@gmail.com"
                 ,"91980729000" , TipoCliente.PESSOAFISICA);
 
         clienteAna.addPerfil(Perfil.ADMIN);
